@@ -1,14 +1,14 @@
 public class Stack {
-	private int [] elements;
+	private String [] elements;
 
-	public void push(int element){
+	public void push(String element){
 
 	}
-	public int pop(){
-		return 0;
+	public String pop(){
+		return "";
 	}
 
-	public int peek(){
-		return 0;
+	public String peek(){
+		return "";
 	}
 }

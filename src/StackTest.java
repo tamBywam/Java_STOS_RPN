@@ -6,9 +6,9 @@ public class StackTest {
 	@Test
 	public void testPopAfterPush() {
 		Stack stack = new Stack();
-		stack.push(10);
-		int result = stack.pop();
+		stack.push("napis");
+		String result = stack.pop();
 
-		assertEquals("pop after push", 10, result);
+		assertEquals("pop after push", "napis", result);
 	}
 }
