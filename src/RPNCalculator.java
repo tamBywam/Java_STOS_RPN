@@ -1,5 +1,4 @@
 import java.util.Set;
-import java.util.Stack;
 
 public class RPNCalculator {
     // Zestaw operatorów dla łatwego sprawdzenia
@@ -7,25 +6,26 @@ public class RPNCalculator {
 
     // Metoda do obliczania wyrażenia RPN
     public int evaluate(String expression) {
-        Stack<Integer> stack = new Stack<>();// Tworzymy stos do przechowywania liczb zamiast Stringów
-        String[] tokens = expression.split(" ");// Dzielimy wyrażenie na tokeny
+        Stack stack = new Stack(); // Tworzymy stos (nasza własna implementacja)
+        String[] tokens = expression.split(" "); // Dzielimy wyrażenie na tokeny
 
         for (String token : tokens) {
             if (OPERATORS.contains(token)) { // Sprawdzamy, czy token jest operatorem
-                int b = stack.pop();
-                int a = stack.pop();
+                int b = Integer.parseInt(stack.pop());
+                int a = Integer.parseInt(stack.pop());
                 // Stosujemy operator i wynik umieszczamy na stosie
-                stack.push(switch (token) {
+                int result = switch (token) {
                     case "+" -> a + b;
                     case "-" -> a - b;
                     case "*" -> a * b;
-                    default -> throw new IllegalArgumentException();// Wyrzucamy wyjątek, jeśli operator jest nieprawidłowy
-                });
+                    default -> throw new IllegalArgumentException(); // Wyrzucamy wyjątek, jeśli operator jest nieprawidłowy
+                };
+                stack.push(String.valueOf(result)); // Wynik zamieniamy na String przed dodaniem na stos
             } else {
-                // Jeśli token jest liczbą, dodajemy go jako int na stos
-                stack.push(Integer.parseInt(token));
+                // Jeśli token jest liczbą, dodajemy go jako String na stos
+                stack.push(token);
             }
         }
-        return stack.pop(); // Zwracamy wynik końcowy
+        return Integer.parseInt(stack.pop()); // Zwracamy wynik końcowy jako int
     }
 }
